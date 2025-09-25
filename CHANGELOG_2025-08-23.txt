@@ -1,0 +1,22 @@
+Idle Cultivation v1 - Upgrades (2025-08-23)
+
+- CSS: Converted scrolling sticky stats banner into static two-row grid; removed marquee animation and sticky positioning.
+- JS: Replaced marquee builder with static two-row grid population for stats banner.
+- JS: Hidden 'Disciples' upgrade from Upgrades page UI (keeps old effects if already owned).
+- JS: Disciple training cost now doubles per training and shows dynamic cost.
+- JS: Added game.totalBreakthroughs counter to persist layer ascensions.
+- JS: totalBreakthroughs now increments on each layer breakthrough and realm ascension.
+- JS: Quest 'layer' progress now tracks cumulative breakthroughs since quest start, not current subLayer.
+- JS: Bounty 'layer' progress now based on breakthroughs since start; no reset on realm ascension.
+- JS: Added game.forgingBuffMult to persist forging multipliers across recalculations and saves.
+- JS: Recalc now multiplies Qi/s by forgingBuffMult.
+- JS: Forging now stacks into forgingBuffMult and persists.
+- JS: loadGame now initializes forgingBuffMult and disciples array.
+- JS: resetGame resets forgingBuffMult and clears disciples.
+- JS: Added getBaseLayerCostNoDiscount() helper.
+- JS: Dantian cap now scales from undiscounted layer cost.
+- JS: Expedition duration clamped to ≥1s and UI now includes all time multipliers.
+- JS: Disciples are now saved in game.disciples and persist across reloads.
+
+[2025-08-23] UI
+- Stats banner changed to a horizontally scrollable 3-row grid; remains sticky under the nav.

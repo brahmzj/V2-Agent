@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>
+   Cultivation Idle Game
+  </title><link href="style.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&amp;display=swap" rel="stylesheet"/><script src="i18n.js"></script><script defer="" src="main.js"></script></head><body class="theme-dark"><nav class="nav-bar"><button aria-label="Story" data-screen="story">
+    Story
+   </button><button aria-label="Upgrades" data-screen="upgrades">
+    Upgrades
+   </button><button aria-label="Ascension" data-screen="ascension">
+    Ascension
+   </button><button aria-label="Cultivation" data-screen="cultivation">
+    Cultivation
+   </button><button aria-label="Sect" data-screen="sect">
+    Sect
+   </button><button aria-label="Codex" data-screen="codex">
+    Codex
+   </button></nav><div aria-live="polite" class="stats-banner" id="stats-banner"><div class="stats-banner__text" id="stats-banner-text"></div><div id="qi-breakdown-panel" class="s1-breakdown"></div></div><div class="screen hidden" id="screen-upgrades"><h2>
+    Upgrades
+   </h2><p class="welcome-msg">
+    Begin your cultivation journey by meditating, viewing your stats and purchasing upgrades all in one place.
+   </p><button class="primary-btn" id="gather-btn-upgrades">
+    Meditate to Gather Qi
+   </button><div class="qi-progress-container"><div class="progress-bar"><div class="progress-inner" id="qi-progress-bar"></div></div><div class="progress-text" id="qi-progress-text"></div></div><div class="multiplier-selector" id="upgrade-multiplier"><label>
+     Buy quantity:
+    </label><button data-mult="1" class="active">
+     ×1
+    </button><button data-mult="2">
+     ×2
+    </button><button data-mult="5">
+     ×5
+    </button><button data-mult="10">
+     ×10
+    </button><button data-mult="max">
+     Max
+    </button></div><div class="upgrade-card"><div class="list" id="upgrade-list"></div></div></div><div class="screen hidden" id="screen-cultivation"><h2>
+    Cultivation
+   </h2><p>
+    Develop your cultivation by mastering techniques and conducting research. Research unlocks at Foundation Establishment (Stage 1).
+   </p><div class="header-with-toggle"><h3>
+     Techniques
+    </h3><button aria-label="Toggle techniques section" class="collapse-toggle" id="skills-toggle"></button></div><div class="list" id="skill-list"></div><div class="header-with-toggle"><h3>
+     Research
+    </h3><button aria-label="Toggle research section" class="collapse-toggle" id="research-toggle"></button></div><div class="list" id="research-list"></div><div class="header-with-toggle"><h3>Alchemy</h3></div><div class="list" id="alchemy-recipes"></div><div class="card"><div class="card-header"><span id="alchemy-brewing-header">Brewing</span></div><div class="card-body list" id="alchemy-queue"></div></div><div class="card"><div class="card-header"><span id="alchemy-inventory-header">Elixir Inventory</span></div><div class="card-body list" id="alchemy-inventory"></div></div></div><div class="screen hidden" id="screen-sect-recruitment"><h2 id="sect-header-recruitment"></h2><p>
+    Recruit disciples and send them on expeditions to gather herbs, spirit stones, beasts and jade. Enable Auto‑send to dispatch expeditions automatically when available.
+   </p><h3>
+    Disciples &amp; Expeditions (
+    <span id="disciple-count">0</span>
+    )
+   </h3><p class="mission-note">
+    Manage your disciples and missions here. More disciple classes and expeditions unlock as you ascend.
+   </p><div class="list" id="disciple-list"></div><div class="auto-send-toggle"><label><input id="auto-send-toggle" type="checkbox"/>
+     Auto‑send expeditions
+    </label></div><div class="list" id="expedition-list"></div></div><div class="screen hidden" id="screen-sect"><h2 id="sect-header"></h2><p>
+    Visit the halls of your sect to manage buildings, forge artifacts, recruit disciples, or progress on your path to enlightenment.
+   </p><div class="sect-hall-buttons grid"><div class="hall-item"><button id="hall-management-btn" class="hall-btn" aria-label="Management Hall" title="Management Hall"><img src="assets/icons/sectLeadership.svg" alt="Management Hall"/></button><span class="hall-label">Management</span></div><div class="hall-item"><button id="hall-forging-btn" class="hall-btn" aria-label="Forging Hall" title="Forging Hall"><img src="assets/icons/spiritForge.svg" alt="Forging Hall"/></button><span class="hall-label">Forging</span></div><div class="hall-item"><button id="hall-dao-btn" class="hall-btn" aria-label="Dao Attainment Hall" title="Dao Attainment Hall"><img src="assets/icons/meditation.svg" alt="Dao Attainment Hall"/></button><span class="hall-label">Dao Attainment</span></div><div class="hall-item"><button id="hall-recruitment-btn" class="hall-btn" aria-label="Recruitment &amp; Mission Hall" title="Recruitment &amp; Mission Hall"><img src="assets/icons/disciples.svg" alt="Recruitment &amp; Mission Hall"/></button><span class="hall-label">Recruitment &amp; Mission</span></div></div></div><div class="screen hidden" id="screen-sect-management"><h2 id="sect-header-management"></h2><p>
+    Expand your sect by upgrading buildings that produce resources. Buildings unlock as you ascend realms.
+   </p><div class="list" id="sect-list"></div></div><div class="screen hidden" id="screen-sect-forging"><h2 id="sect-header-forging"></h2><p>
+    Forge powerful artifacts to bolster your sect’s might. Forging unlocks at Golden Core (Stage 3).
+   </p><div class="list" id="forging-list"></div><p class="placeholder" id="forging-placeholder">
+    Forging unlocks at Golden Core (Stage 3).
+   </p></div><div class="screen hidden" id="screen-dao"><h2>
+    Dao Attainment Hall
+   </h2><p>
+    Aim for the peak and receive sect rewards for your progress in the Immortal Dao.
+   </p><div class="list" id="quest-list"></div><div class="list" id="bounty-list"></div></div><div class="screen hidden" id="screen-codex"><h2>
+    Codex
+   </h2><p>
+    Review your achievements, uncover lore and read guides to master the world.
+   </p><div class="codex-toc"><a href="#codex-achievements">
+     Achievements
+    </a><a href="#codex-lore">
+     Lore
+    </a><a href="#codex-general">
+     General
+    </a><a href="#codex-upgrades">
+     Upgrades
+    </a><a href="#codex-ascension">
+     Ascension
+    </a><a href="#codex-tech">
+     Tech/Research
+    </a><a href="#codex-quests">
+     Quests
+    </a><a href="#codex-disciples">
+     Disciples
+    </a><a href="#codex-forging">
+     Forging
+    </a><a href="#codex-settings">
+     Settings
+    </a><a href="#codex-glossary">
+     Glossary
+    </a></div><div class="card" id="codex-achievements"><div class="card-header"><span>
+      Achievements
+     </span><button class="collapse-toggle" id="ach-toggle"></button></div><div class="card-body list" id="ach-list"></div></div><div class="card" id="codex-lore"><div class="card-header"><span>
+      Lore
+     </span><button class="collapse-toggle" id="lore-toggle"></button></div><div class="card-body list" id="lore-list"></div></div><div class="card" id="codex-general"><div class="card-header"><span>
+      General Gameplay
+     </span></div><div class="card-body"><p>
+      Your goal is to accumulate
+      <strong>
+       Qi
+      </strong>
+      , break through nine minor layers per realm and ascend to higher realms.
+     </p><p>
+      Gather Qi actively by focusing your mind through meditation, or passively through cultivation improvements.  Once your dantian (Qi capacity) is full, advance to the next layer by initiating a breakthrough in the Ascension hall.
+     </p></div></div><div class="card" id="codex-upgrades"><div class="card-header"><span>
+      Upgrades
+     </span></div><div class="card-body"><p>
+      This section combines manual gathering, a display of your cultivation statistics and avenues to improve your abilities.  Each improvement increases Qi generation or resource production and becomes more expensive over time.  You may acquire multiple improvements at once (×1, ×2, ×5, ×10) or select <em>Max</em> to automatically purchase as many levels as you can currently afford.
+     </p></div></div><div class="card" id="codex-ascension"><div class="card-header"><span>
+      Ascension &amp; Qi Cap
+     </span></div><div class="card-body"><p>
+      Your Qi capacity is limited by your current realm and layer. After filling your dantian, you can break through a minor layer to gain a permanent
+      <strong>
+       2%
+      </strong>
+      Qi multiplier. After nine layers, you may ascend to the next realm, resetting Qi but granting a
+      <strong>
+       10%
+      </strong>
+      bonus and Ascension Points (AP) for perks. Ascending to a new realm also requires herbs, spirit stones, beast energy and jade—so invest in disciples and buildings to gather these resources.
+     </p></div></div><div class="card" id="codex-tech"><div class="card-header"><span>
+      Techniques &amp; Research
+     </span></div><div class="card-body"><p>
+      Techniques (skills) unlock as you progress and provide active or passive boosts. Research projects offer long‑term enhancements to various systems; they unlock at Foundation Establishment.
+     </p></div></div><div class="card" id="codex-quests"><div class="card-header"><span>
+      Quests &amp; Bounties
+     </span></div><div class="card-body"><p>
+      Complete daily quests and weekly bounties for extra resources.  Progress on all quests and bounties is tracked automatically; there is no “Start” button.  Once the requirements are met, you may claim the reward to advance to the next tier.  Quests &amp; bounties are now managed through the <strong>Dao Attainment Hall</strong> (under the Sect), rather than the Missions page.
+     </p></div></div><div class="card" id="codex-disciples"><div class="card-header"><span>
+      Disciples &amp; Expeditions
+     </span></div><div class="card-body"><p>
+      Recruit disciples to gather herbs, spirit stones and beasts on your behalf. Send them on expeditions; enabling Auto‑send will dispatch them automatically when available. Disciples and expeditions are now managed through the <strong>Recruitment &amp; Mission Hall</strong> under your sect (unlocked at Foundation Establishment). Quests and bounties remain in the <strong>Dao Attainment Hall</strong>.
+     </p></div></div><div class="card" id="codex-forging"><div class="card-header"><span>
+      Forging &amp; Sect
+     </span></div><div class="card-body"><p>
+      The Sect page now serves as a hub to four halls:
+      <strong>Management Hall</strong> (unlocked at Foundation Establishment) for upgrading sect buildings that generate herbs, spirit stones, beasts and jade;
+      <strong>Forging Hall</strong> (unlocked at Golden Core) where you spend spirit stones to forge artifacts, charms and weapons that permanently boost resource production. Forging tasks take time to complete and have a small chance to fail; forging <em>Fortune Charms</em> reduces this risk. Additional research and artifacts can increase your forging slots so you can craft multiple items concurrently;
+      <strong>Dao Attainment Hall</strong> (available immediately) where you view your progress on Quests &amp; Bounties and claim rewards; and
+      the <strong>Recruitment &amp; Mission Hall</strong> (unlocked at Foundation Establishment) where you recruit disciples and send them on expeditions to gather additional resources. Use forging to craft tools and weapons for long‑term bonuses, manage your sect to produce more resources as you ascend, and rely on your disciples to fetch valuable materials.
+     </p></div></div><div class="card" id="codex-achlore"><div class="card-header"><span>
+      Achievements &amp; Lore Overview
+     </span></div><div class="card-body"><p>
+      The Achievements section tracks your milestones; Lore gradually reveals the story behind the cultivation world.  Select the headers above to collapse or expand each section.
+     </p></div></div><div class="card" id="codex-settings"><div class="card-header"><span>
+      Settings
+     </span></div><div class="card-body"><p>
+      You can adjust color‑blind mode, font size, motion reduction, background and theme using the small gear icon.  You may also restart your cultivation journey if you wish to begin anew.  Hidden in the Settings are testing toggles that multiply your Qi gain per tap or per second by 100×; these are disabled by default and intended for testing purposes only.
+     </p></div></div><div class="card" id="codex-glossary"><div class="card-header"><span>
+      Glossary
+     </span></div><div class="card-body"><p><strong>
+       Qi
+      </strong>
+      : the fundamental life‑force energy that permeates all things.  Cultivators absorb ambient Qi from the world through meditation and breathing techniques.  This energy circulates throughout the body via meridians and is stored in the dantian.  For your cultivation journey, Qi is your primary resource — gather it actively through meditation, passively through improvements and disciples, and use it to break through layers and realms.
+     </p><p><strong>
+       Dantian
+      </strong>
+      : a spiritual “energy sea” located in the lower abdomen where Qi is stored.  Think of it as your internal reservoir.  As you cultivate, your dantian fills up; when full you must break through a minor layer to expand its capacity.  Upgrades like
+      <em>
+       Dantian Expansion
+      </em>
+      and Elixirs increase the size of your dantian, allowing you to accumulate more Qi before each breakthrough.
+     </p><p><strong>
+       Meridians
+      </strong>
+      : channels within the body through which Qi flows.  Opening and clearing your meridians allows Qi to circulate more freely, increasing your strength and unlocking higher cultivation levels.  Upgrades such as
+      <em>
+       Meridian Opening
+      </em>
+      and techniques like
+      <em>
+       Body Cultivation
+      </em>
+      strengthen your meridians.  In many novels, meridians are blocked or damaged; here you gradually improve them to boost production.
+     </p><p><strong>
+       Realms &amp; Layers
+      </strong>
+      : Cultivation is divided into major realms (e.g.
+      <em>
+       Qi Gathering
+      </em>
+      ,
+      <em>
+       Foundation Establishment
+      </em>
+      ,
+      <em>
+       Core Formation
+      </em>
+      ,
+      <em>
+       Golden Core
+      </em>
+      , etc.).  Each realm contains nine minor layers.  Advancing a layer (breaking through) grants permanent multipliers and brings you closer to the next realm.  Once all nine layers are completed, you may ascend to the next realm, resetting your Qi but unlocking new upgrades, resources and mechanics.  Later realms introduce new challenges such as heavenly tribulations.
+     </p><p><strong>
+       Heavenly Tribulations
+      </strong>
+      : natural ordeals encountered when ascending to higher realms.  They test a cultivator’s body and spirit, often in the form of lightning or karmic flames.  Along your path, tribulations act as milestones that require careful preparation; failing them can slow your progress.  Preparing adequate Qi reserves and research boosts improves your chances of success.
+     </p><p><strong>Herbs</strong>: common botanical materials used in alchemy and medicinal research.  Herbs are gathered by disciples on expeditions and harvested from sect buildings like herb gardens.  Spend herbs to brew pills and elixirs that boost Qi regeneration, unlock certain techniques and complete research projects.
+     </p><p><strong>Spirit Stones</strong>: condensed crystals of Qi that function as currency and forging material.  Earn Spirit Stones by ascending to new realms, completing quests and bounties, claiming daily bonuses and producing them in your sect mines or via expeditions.  Use Spirit Stones to purchase upgrades, recruit and train disciples, perform research and forge artifacts.
+     </p><p><strong>Beast Energy</strong>: the essence extracted from spirit beasts encountered during expeditions.  Beast Energy fuels Beast Taming techniques, empowers Beast Dens and is required for beast‑focused research and artifacts.  Acquire it by sending disciples on expeditions to tame or defeat spirit beasts, or by constructing Beast Dens in your sect.
+     </p><p><strong>Jade</strong>: a rare and precious gemstone prized by cultivators.  Jade is used for advanced research, high‑tier sect upgrades and crafting legendary artifacts.  It is primarily obtained from challenging expeditions, rare bounties and later‑stage sect structures unlocked in higher realms.
+     </p><p><strong>
+       Techniques &amp; Research
+      </strong>
+      : specialised skills or scholarly pursuits that enhance your cultivation.  Techniques include martial arts (e.g.
+      <em>
+       Swordplay
+      </em>
+      ), alchemy, body cultivation and sect leadership; they often provide flat bonuses or active abilities.  Research projects are longer‑term investments unlocking efficiency improvements (reducing costs or increasing resource yield) and new avenues for growth.  Both are essential for your later progression.
+     </p><p><strong>
+       Disciples &amp; Sects
+      </strong>
+      : Cultivators rarely stand alone.  A sect is a community of cultivators led by a master (you).  Recruit disciples to help gather resources and expand your influence.  Disciples have classes and levels that determine their efficiency; sending them on expeditions yields herbs, spirit stones, beast energy and sometimes jade.  Your sect grows by building structures like herb gardens and spirit mines, which produce resources automatically.
+     </p><p><strong>
+       Forging &amp; Alchemy
+      </strong>
+      : Two advanced arts.
+      <em>
+       Alchemy
+      </em>
+      uses herbs to craft pills and elixirs that provide temporary or permanent boosts; this is represented through techniques and research.
+      <em>
+       Forging
+      </em>
+      uses spirit stones to craft artifacts and weapons that permanently enhance your Qi production.  These mechanics unlock as you reach Foundation and Golden Core realms respectively.
+     </p><p><strong>
+       Ascension Points &amp; Perks
+      </strong>
+      : Each time you ascend to a new realm, you earn Ascension Points (AP).  AP can be spent on perks such as Qi Mastery, Upgrade Efficiency or Resource Proficiency.  These perks provide permanent, incremental bonuses across all playthroughs, allowing you to tailor your strategy.
+     </p><p><strong>
+       Story &amp; Lore
+      </strong>
+      : Beyond numbers, cultivation stories often follow a protagonist’s journey from obscurity to immortality.  Your journey mirrors that narrative through unfolding stories and the lore you unlock.  Each realm ascended reveals more of your character’s backstory, the world’s history and the mysteries of the cultivation path.
+     </p><p><strong>
+       Early Cultivation
+      </strong>
+      : At the start of your journey you generate a small amount of Qi passively.  To advance, focus on
+      <em>
+       Meditation
+      </em>
+      and
+      <em>
+       Breathing Technique
+      </em>
+      , fundamental practices that strengthen your Qi flow and enhance the amount of Qi you collect with each breath.  Invest in these techniques to build a solid foundation for future breakthroughs.
+     </p><p><strong>
+       Traits &amp; Luck
+      </strong>
+      : Disciples now have distinct personalities.  In addition to existing traits like
+      <em>
+       Diligent
+      </em>
+      (resource output +5% per level),
+      <em>
+       Loyal
+      </em>
+      (shorter expeditions) and
+      <em>
+       Forge Master
+      </em>
+      (faster forging), some disciples are born
+      <em>
+       Lucky
+      </em>
+      .  Lucky disciples reduce the number of expeditions needed for rare rewards, making special finds more frequent.
+     </p><p><strong>
+       Fortune Charms
+      </strong>
+      : Not all artifacts simply boost production.  Fortune Charms are forged using spirit stones and reduce expedition failure chance by 10% each.  Stack multiple charms to venture into dangerous expeditions with greater confidence.
+     </p></div></div></div><div class="screen hidden" id="screen-story"><h2>
+    Story
+   </h2><div id="story-intro"><p>
+     After passing away in a mundane world, you awaken in a realm governed by cultivation.  A mysterious voice bestows upon you a guiding artifact to aid your journey.  Through meditation, refining your techniques and directing disciples you advance your cultivation base.
+    </p><p>
+     As the story begins, you are a novice cultivator at the
+     <em>
+      Qi Gathering
+     </em>
+     stage.  Through relentless practice you collect ambient
+     <a href="#" onclick="showScreen('codex'); document.getElementById('codex-glossary').scrollIntoView({behavior:'smooth'}); return false;">
+      Qi
+     </a>
+     , open your
+     <a href="#" onclick="showScreen('codex'); document.getElementById('codex-glossary').scrollIntoView({behavior:'smooth'}); return false;">
+      meridians
+     </a>
+     and strengthen your
+     <a href="#" onclick="showScreen('codex'); document.getElementById('codex-glossary').scrollIntoView({behavior:'smooth'}); return false;">
+      dantian
+     </a>
+     .  With each breakthrough you gain deeper insight into the Dao and are rewarded with
+     <a href="#" onclick="showScreen('codex'); document.getElementById('codex-glossary').scrollIntoView({behavior:'smooth'}); return false;">
+      Spirit Stones
+     </a>
+     , the currency of this world.  Completing quests and bounties, you meet fellow cultivators and recruit disciples to aid your journey.
+    </p><p>
+     Upon establishing your
+     <em>
+      Foundation
+     </em>
+     , you unlock the secrets of research and alchemy.  Your sect grows from a humble abode into a thriving institution with herb gardens, spirit mines and beast pens.  Disciples embark on expeditions to gather rare ingredients while you forge artifacts to augment your power.  The ascension system resets your
+     <a href="#" onclick="showScreen('codex'); document.getElementById('codex-glossary').scrollIntoView({behavior:'smooth'}); return false;">
+      Qi
+     </a>
+     , but each realm ascended brings exponential strength and new possibilities.
+    </p><p>
+     Ultimately, this journey chronicles your rise from a reincarnated mortal to an immortal sovereign.  The choices you make — which skills to learn, which research to prioritise, how to lead your sect — determine how swiftly you soar to the peak of existence.  May your cultivation be smooth, and may you one day transcend the final tribulation to attain Eternal Godhood.
+    </p></div><div class="story-chapters" id="story-chapters"></div></div><div class="screen hidden" id="screen-ascension"><h2>
+    Ascension &amp; Perks
+   </h2><p>
+    Break through layers to ascend: each layer grants a 2% multiplier, and after nine layers you may ascend to a higher realm. Ascending to a new realm provides a 10% multiplier. Ascending requires herbs, spirit stones, beast energy and jade, so manage your resources wisely. Use the Ascension Points (AP) you earn to unlock powerful perks in the tree below.
+   </p><div class="stats-display" id="ascension-info"></div><div class="qi-progress-container"><div class="progress-bar"><div class="progress-inner" id="asc-progress-bar"></div></div><div class="progress-text" id="asc-progress-text"></div></div><button class="primary-btn" id="ascend-btn">
+    Break Through
+   </button><div class="stats-display" id="asc-points"></div><div class="list" id="asc-perks-list"></div></div><div class="screen hidden" id="screen-settings"><h2>
+    Settings
+   </h2><div class="settings-section"><label data-i18n="label.colorBlind"><input id="cb-color-blind" type="checkbox"/>
+     Color‑blind mode
+    </label><br/><label data-i18n="label.largeFont"><input id="cb-large-font" type="checkbox"/>
+     Large font
+    </label><br/><label data-i18n="label.reduceMotion"><input id="cb-reduce-motion" type="checkbox"/>
+     Reduce motion
+    </label><br/><label data-i18n="label.theme">
+     Theme:
+     <select id="theme-select"><option value="dark">
+       Dark
+      </option><option value="light">
+       Light
+      </option></select></label><br/><label data-i18n="label.background">
+     Background:
+     <select id="bg-select"><option value="0">
+       Nebula Purple
+      </option><option value="1">
+       Nebula Green
+      </option><option value="2">
+       Nebula Pink
+      </option><option value="3">
+       Nebula Ember
+      </option><option value="4">
+       Mountain Valley
+      </option></select></label><br/><label data-i18n="label.backgroundDimmer">
+     Background dimmer:
+     <input id="bg-dimmer-slider" max="0.3" min="0" step="0.05" type="range"/></label><br/><label id="language-select-label">
+     Language:
+     <select id="language-select"><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="zh">中文</option><option value="hi">हिन्दी</option></select></label><br/><label data-i18n="label.tapMult"><input id="cb-tap-mult" type="checkbox"/>
+     Qi per tap ×100 (testing)
+    </label><br/><label data-i18n="label.psMult" class="disabled-setting"><input id="cb-ps-mult" type="checkbox" disabled="disabled"/>
+     Qi per second ×100 (testing)
+    </label><br/><button class="primary-btn" id="export-save-btn">
+     Export Save
+    </button><button class="primary-btn" id="import-save-btn">
+     Import Save
+    </button><br/><button class="danger-btn" id="reset-game-btn">
+     Reset Game
+    </button></div></div><div class="toast hidden" id="toast"></div><button aria-label="Settings" class="floating-btn settings-icon" id="settings-icon">
+   ⚙️
+  </button><button aria-label="Toggle Fullscreen" class="floating-btn fullscreen-icon" id="fullscreen-btn">
+   ⛶
+  </button><div id="lang-modal" class="modal hidden"><div class="modal-content"><h2>Select Language</h2><select id="lang-select-dropdown"><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="zh">中文</option><option value="hi">हिन्दी</option></select><button id="lang-select-confirm" class="primary-btn">OK</button></div></div></body></html>

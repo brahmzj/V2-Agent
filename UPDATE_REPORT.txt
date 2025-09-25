@@ -1,0 +1,26 @@
+Update Report - V1_Cultivation_World (2025-08-22)
+
+1) Ascension page copy updated (index.html):
+Old: "Break through layers to ascend to the next realm: each layer grants a 5% multiplier, and after nine layers you may ascend for an even bigger bonus of about 40%. Ascending requires herbs, minerals, beast energy and jade, so manage your resources wisely. Use the Ascension Points (AP) you earn to unlock powerful perks in the tree below."
+New: "Break through layers to ascend: each layer grants a 5% multiplier, and after nine layers you may ascend to a higher realm. Ascending requires herbs, minerals, beast energy and jade, so manage your resources wisely. Use the Ascension Points (AP) you earn to unlock powerful perks in the tree below."
+
+2) Asset integrity fixes:
+- Some research entries referenced icons that were missing. To avoid broken images, added fallback icon files:
+  - assets/icons/ascensionTheory.svg -> copied from daoistInsights.svg
+  - assets/icons/cosmicAlignment.svg -> copied from elementalAttunement.svg
+  - assets/icons/soulSearch.svg -> copied from soulRefinement.svg
+  - assets/icons/temporalRift.svg -> copied from meridianOpening.svg
+  - assets/icons/universalResonance.svg -> copied from spiritWell.svg
+
+3) Static validation / checks:
+- All HTML/CSS/JS files are syntactically balanced (parentheses/brackets/braces).
+- No duplicate element IDs found in index.html.
+- All script and stylesheet references resolve within the project.
+- All image asset paths referenced in HTML/CSS/JS exist (after the fallback additions above).
+- main.js references a few optional elements ('gather-btn', 'home-stats', 'upgrade-stats') that are not present in index.html, but the code guards for their absence (null checks), so no runtime errors are expected.
+
+Notes:
+- Due to the current environment, a real browser run-through wasn't executed. The above checks focus on static correctness and asset integrity. If you notice any runtime behavior you want adjusted, let me know and I'll refine quickly.
+
+[2025-08-23] UI Polish
+- Stats banner now 3-row horizontally scrollable (grid-auto-flow: column; snap scrolling). Keyboard accessible.
